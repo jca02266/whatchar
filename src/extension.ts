@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as iconv from 'iconv-lite';
 
 const printableLetterRegexp = /^[^\p{Cc}\p{Cf}\p{Zl}\p{Zp}]$/
 
@@ -10,11 +11,28 @@ function whatchar(): string | void {
 		const codePoint = editor.document.getText().codePointAt(offset)
 		const letter = codePoint && String.fromCodePoint(codePoint)
 		if (codePoint && letter) {
-			const code = "U+" + codePoint.toString(16).padStart(4, "0").toUpperCase()
+			const hex = "U+" + codePoint.toString(16).padStart(4, "0").toUpperCase();
+			const dec = codePoint.toString(10);
+
+			let cp932: string;
+			try {
+				const buf = iconv.encode(letter, 'cp932');
+				// iconv-lite maps unmappable characters to '?'.
+				// We check if the result is '?' and the original char was not '?'.
+				if (buf.length === 1 && buf[0] === 0x3f && letter !== '?') {
+					cp932 = '(unmappable)';
+				} else {
+					cp932 = buf.toString('hex').toUpperCase();
+				}
+			} catch (e) {
+				cp932 = '(error)';
+			}
+
+			const detail = `(${hex}, Dec: ${dec}, CP932: ${cp932})`
 			if (printableLetterRegexp.test(letter)) {
-				return `"${letter}" (${code})`
+				return `"${letter}" ${detail}`
 			} else {
-				return `(${code})`
+				return detail
 			}
 		}
 	}
