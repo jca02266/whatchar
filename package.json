@@ -34,22 +34,14 @@
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",
 		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"pretest": "yarn run compile",
-		"test": "node ./out/test/runTest.js"
+		"watch": "tsc -watch -p ./"
 	},
 	"dependencies": {
 		"iconv-lite": "^0.6.3"
 	},
 	"devDependencies": {
-		"@types/mocha": "^10.0.0",
 		"@types/node": "^13.11.0",
 		"@types/vscode": "^1.46.0",
-		"@vscode/test-electron": "^2.5.2",
-		"mocha": "^10.0.0",
 		"typescript": "^3.8.3"
-	},
-	"resolutions": {
-		"serialize-javascript": "^7.0.5"
 	}
 }
