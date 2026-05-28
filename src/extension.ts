@@ -53,11 +53,26 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	}))
 
-	context.subscriptions.push(vscode.window.onDidChangeTextEditorSelection((e) => {
+	const updateStatusBar = () => {
+		const enabled = vscode.workspace.getConfiguration('whatchar').get<boolean>('showOnCursorMove', true)
+		if (!enabled) {
+			item.hide()
+			return
+		}
 		const text = whatchar()
 		if (text) {
 			item.text = text
 			item.show()
+		} else {
+			item.hide()
+		}
+	}
+
+	context.subscriptions.push(vscode.window.onDidChangeTextEditorSelection(() => updateStatusBar()))
+
+	context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {
+		if (e.affectsConfiguration('whatchar.showOnCursorMove')) {
+			updateStatusBar()
 		}
 	}))
 }

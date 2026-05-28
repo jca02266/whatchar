@@ -1,65 +1,41 @@
-# whatchar README
+# whatchar
 
-This is the README for your extension "whatchar". After writing up a brief description, we recommend including the following sections.
+**whatchar** is a VS Code extension that shows character information at the cursor position.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Whenever you move the cursor in the editor, the status bar (bottom right) displays the following information about the character under the cursor:
 
-For example if there is an image subfolder under your extension project workspace:
+- **Unicode code point** (e.g. `U+3042`)
+- **Decimal value** (e.g. `Dec: 12354`)
+- **CP932 (Shift_JIS) byte sequence** (e.g. `CP932: 82A0`)
 
-\!\[feature X\]\(images/feature-x.png\)
+**Status bar display examples:**
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+| Character | Status bar |
+|-----------|-----------|
+| Printable (`あ`) | `"あ" (U+3042, Dec: 12354, CP932: 82A0)` |
+| Non-printable | `(U+000A, Dec: 10, CP932: 0A)` |
+| CP932 unmappable (`😀`) | `"😀" (U+1F600, Dec: 128512, CP932: (unmappable))` |
 
-## Requirements
+You can also run the **`Show what character`** command (`whatchar.show`) to display the same information as a popup notification.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+This extension is useful for identifying characters that look similar, such as full-width vs. half-width characters, or detecting invisible control characters in text.
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `whatchar.show` | Show character info for the character at the cursor as a notification |
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
+| Setting | Type | Default | Description |
+|---------|------|---------|-------------|
+| `whatchar.showOnCursorMove` | boolean | `true` | Show character info in the status bar whenever the cursor moves. Set to `false` to disable the automatic status bar update. |
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Initial release.

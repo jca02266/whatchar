@@ -19,7 +19,17 @@
 				"command": "whatchar.show",
 				"title": "Show what character"
 			}
-		]
+		],
+		"configuration": {
+			"title": "whatchar",
+			"properties": {
+				"whatchar.showOnCursorMove": {
+					"type": "boolean",
+					"default": true,
+					"description": "Show character info in the status bar whenever the cursor moves."
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",
