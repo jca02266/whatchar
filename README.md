@@ -8,15 +8,17 @@ Whenever you move the cursor in the editor, the status bar (bottom right) displa
 
 - **Unicode code point** (e.g. `U+3042`)
 - **Decimal value** (e.g. `Dec: 12354`)
+- **UTF-8 byte sequence** (e.g. `UTF-8: E38182`)
+- **UTF-16BE (network byte order) byte sequence** (e.g. `UTF-16BE: 3042`)
 - **CP932 (Shift_JIS) byte sequence** (e.g. `CP932: 82A0`)
 
 **Status bar display examples:**
 
 | Character | Status bar |
 |-----------|-----------|
-| Printable (`あ`) | `"あ" (U+3042, Dec: 12354, CP932: 82A0)` |
-| Non-printable | `(U+000A, Dec: 10, CP932: 0A)` |
-| CP932 unmappable (`😀`) | `"😀" (U+1F600, Dec: 128512, CP932: (unmappable))` |
+| Printable (`あ`) | `"あ" (U+3042, Dec: 12354, UTF-8: E38182, UTF-16BE: 3042, CP932: 82A0)` |
+| Non-printable | `(U+000A, Dec: 10, UTF-8: 0A, UTF-16BE: 000A, CP932: 0A)` |
+| CP932 unmappable (`😀`) | `"😀" (U+1F600, Dec: 128512, UTF-8: F09F9880, UTF-16BE: D83DDE00, CP932: (unmappable))` |
 
 You can also run the **`Show what character`** command (`whatchar.show`) to display the same information as a popup notification.
 

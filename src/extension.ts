@@ -14,6 +14,9 @@ function whatchar(): string | void {
 			const hex = "U+" + codePoint.toString(16).padStart(4, "0").toUpperCase();
 			const dec = codePoint.toString(10);
 
+			const utf8 = Buffer.from(letter, 'utf8').toString('hex').toUpperCase();
+			const utf16be = iconv.encode(letter, 'utf-16be').toString('hex').toUpperCase();
+
 			let cp932: string;
 			try {
 				const buf = iconv.encode(letter, 'cp932');
@@ -28,7 +31,7 @@ function whatchar(): string | void {
 				cp932 = '(error)';
 			}
 
-			const detail = `(${hex}, Dec: ${dec}, CP932: ${cp932})`
+			const detail = `(${hex}, Dec: ${dec}, UTF-8: ${utf8}, UTF-16BE: ${utf16be}, CP932: ${cp932})`
 			if (printableLetterRegexp.test(letter)) {
 				return `"${letter}" ${detail}`
 			} else {
